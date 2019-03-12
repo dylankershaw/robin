@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from django.http import JsonResponse
 from .models import Phrase, Intent
+from .intent_methods import IntentMethods
 import boto3
 
 
@@ -34,4 +35,5 @@ def respond(request):
         Phrase.create(name=phrase, intent=intent)
 
     # trigger intent-specific method
-    return JsonResponse({'response': intent.name})
+    response = getattr(IntentMethods, intent.name)()
+    return JsonResponse({'response': response})
