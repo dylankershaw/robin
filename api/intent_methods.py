@@ -12,7 +12,12 @@ class IntentMethods:
         if hour == 0:
             hour = 12
 
-        minutes = "o clock" if time.minute == 0 else time.minute
+        if time.minute == 0:
+            minutes = 'o clock'
+        elif time.minute < 10:
+            minutes = 'o ' + str(time.minute)
+        else:
+            minutes = time.minute
 
         return f'The time is {hour} {minutes}'
 
