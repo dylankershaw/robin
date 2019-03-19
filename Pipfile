@@ -15,6 +15,7 @@ django-cors-headers = "*"
 "boto3" = "*"
 django-heroku = "*"
 gunicorn = "*"
+django-extensions = "*"
 
 [requires]
 python_version = "3.7"
