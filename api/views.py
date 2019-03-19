@@ -24,7 +24,7 @@ def respond(request):
         response = client.post_text(
             botName='robin',
             botAlias='robin',
-            userId='testing',  # this should be unique for each client
+            userId='testing',  # this should be unique for each client TODO: make this an env var
             # sessionAttributes={'string': 'string'}, # optional
             # requestAttributes={'string': 'string'}, # optional
             inputText=phrase)
