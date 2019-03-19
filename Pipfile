@@ -7,7 +7,6 @@ verify_ssl = true
 pylint = "*"
 yapf = "*"
 django-extensions = "*"
-autopep8 = "*"
 
 [packages]
 django = "*"

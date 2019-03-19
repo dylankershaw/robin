@@ -2,10 +2,10 @@ import datetime
 
 
 class IntentMethods:
-    def greeting(self):
+    def greeting():
         return 'Well hello there.'
 
-    def get_time(self):
+    def get_time():
         time = datetime.datetime.now()
 
         hour = time.hour % 12
@@ -16,5 +16,5 @@ class IntentMethods:
 
         return f'The time is {hour} {minutes}'
 
-    def intent_not_found(self):
+    def intent_not_found():
         return 'I don\'t understand'
