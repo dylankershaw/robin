@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime
+from pytz import timezone
 
 
 class IntentMethods:
@@ -6,7 +7,8 @@ class IntentMethods:
         return 'Well hello there.'
 
     def get_time():
-        time = datetime.datetime.now()
+        tz = timezone('US/Eastern')
+        time = datetime.now(tz)
 
         hour = time.hour % 12
         if hour == 0:
