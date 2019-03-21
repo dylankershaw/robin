@@ -15,13 +15,13 @@ class IntentMethods:
             hour = 12
 
         if time.minute == 0:
-            minutes = 'o clock'
+            minutes = 00
         elif time.minute < 10:
-            minutes = 'o ' + str(time.minute)
+            minutes = '0' + str(time.minute)
         else:
             minutes = time.minute
 
-        return f'The time is {hour} {minutes}'
+        return f'The time is {hour}:{minutes}'
 
     def intent_not_found():
         return 'I don\'t understand'
