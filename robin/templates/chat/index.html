@@ -1,5 +1,23 @@
 <html>
-    <body>
-        ayyoyoyo
-    </body>
+
+<body>
+    <label for="input">you:</label>
+    <form onsubmit="handleSubmit(event)">
+        <input id="input" />
+    </form>
+</body>
+
+<script>
+    function handleSubmit(event) {
+        event.preventDefault();
+        const inputValue = document.getElementById("input").value;
+        fetch('/query?phrase=' + inputValue)
+            .then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                alert(data.response);
+            });
+    }
+</script>
+
 </html>
