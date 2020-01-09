@@ -32,9 +32,9 @@ class IntentMethods:
 
         temp = round(r['currently']['temperature'])
         feels_like = round(r['currently']['apparentTemperature'])
-        summary= r['hourly']['summary']
+        summary = r['hourly']['summary']
 
         return f'It is currently {temp} degrees but feels like {feels_like}. {summary}'
 
     def intent_not_found():
-        return 'I don\'t understand'
+        return 'I don\'t understand, but I\'m learning every day.'
