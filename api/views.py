@@ -17,11 +17,12 @@ def respond(request):
     try:
         # see if phrase exists in db and get its intent
         intent = Phrase.objects.get(name=phrase).intent
+        slots = {}
     except:
         client = boto3.client('lex-runtime')
 
         # send input to lex and get back the correct intent
-        response = client.post_text(
+        lex_response = client.post_text(
             botName='robin',
             botAlias='robin',
             userId='testing',  # this should be unique for each client TODO: make this an env var
@@ -29,11 +30,12 @@ def respond(request):
             # requestAttributes={'string': 'string'}, # optional
             inputText=phrase)
 
-        intent = Intent.objects.get(name=response['message'])
+        intent = Intent.objects.get(name=lex_response['intentName'])
+        slots = lex_response['slots']
 
         # add phrase to db and associate it with the intent
         Phrase.create(name=phrase, intent=intent)
 
     # trigger intent-specific method
-    response = getattr(IntentMethods, intent.name)()
-    return JsonResponse({'response': response})
+    method_response = getattr(IntentMethods, intent.name)(**slots)
+    return JsonResponse({'response': method_response})

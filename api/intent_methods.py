@@ -23,9 +23,12 @@ class IntentMethods:
         else:
             minutes = time.minute
 
-        return f'The time is {hour}:{minutes}'
+        return f'The time is {hour}:{minutes}.'
 
-    def get_weather(latitude=40.7128, longitude=-74.0060):
+    def get_weather():
+        latitude = 40.7128
+        longitude = -74.0060
+
         r = requests.get(
             f"https://api.darksky.net/forecast/{os.environ.get('DARKSKY_KEY')}/{latitude},{longitude}"
         ).json()
@@ -35,6 +38,12 @@ class IntentMethods:
         summary = r['hourly']['summary']
 
         return f'It is currently {temp} degrees but feels like {feels_like}. {summary}'
+
+    def get_train_time(**kwargs):
+        time = 'placeholder o clock' # TODO: get this from MTA API
+        station = 'broadway-lafayette' # TODO: make this dynamic
+
+        return f"The next {kwargs['direction']} {kwargs['trainLine']} train will depart {station} at {time}."
 
     def intent_not_found():
         return 'I don\'t understand, but I\'m learning every day.'
