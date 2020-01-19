@@ -30,8 +30,12 @@ def respond(request):
             # requestAttributes={'string': 'string'}, # optional
             inputText=phrase)
 
-        intent = Intent.objects.get(name=lex_response['intentName'])
-        slots = lex_response['slots']
+        try:
+            intent = Intent.objects.get(name=lex_response['intentName'])
+            slots = lex_response['slots']
+        except:
+            intent = Intent.objects.get(name='intent_not_found')
+            slots = {}
 
         # add phrase to db and associate it with the intent
         Phrase.create(name=phrase, intent=intent)
