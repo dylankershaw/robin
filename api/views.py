@@ -31,14 +31,12 @@ def respond(request):
             inputText=phrase)
 
         try:
-            intent = Intent.objects.get(name=lex_response['intentName'])
+            intent, _ = Intent.objects.get_or_create(name=lex_response['intentName'])
+            Phrase.create(name=phrase, intent=intent)
             slots = lex_response['slots']
         except:
             intent = Intent.objects.get(name='intent_not_found')
             slots = {}
-
-        # add phrase to db and associate it with the intent
-        Phrase.create(name=phrase, intent=intent)
 
     # trigger intent-specific method
     method_response = getattr(IntentMethods, intent.name)(**slots)
