@@ -6,16 +6,6 @@ import os
 import pyttsx3
 import requests
 
-"""
-This demo file shows you how to use the new_message_callback to interact with
-the recorded audio after a keyword is spoken. It uses the speech recognition
-library in order to convert the recorded audio into text.
-
-Information on installing the speech recognition library can be found at:
-https://pypi.python.org/pypi/SpeechRecognition/
-"""
-
-
 interrupted = False
 
 
@@ -31,7 +21,8 @@ def audioRecorderCallback(fname):
         # instead of `r.recognize_google(audio)`
         text = r.recognize_google(audio)
         print('input: ' + text)
-        r = requests.get('http://api-robin.herokuapp.com/query/?phrase=' + text)
+        r = requests.get('http://api-robin.herokuapp.com/query/?phrase=' +
+                         text)
         output = r.json()['response']
         print('output: ' + output)
         engine = pyttsx3.init()
@@ -41,15 +32,16 @@ def audioRecorderCallback(fname):
     except sr.UnknownValueError:
         print "Google Speech Recognition could not understand audio"
     except sr.RequestError as e:
-        print "Could not request results from Google Speech Recognition service; {0}".format(e)
+        print "Could not request results from Google Speech Recognition service; {0}".format(
+            e)
 
     os.remove(fname)
 
 
-
 def detectedCallback():
-  sys.stdout.write("recording audio...")
-  sys.stdout.flush()
+    sys.stdout.write("recording audio...")
+    sys.stdout.flush()
+
 
 def signal_handler(signal, frame):
     global interrupted
@@ -59,6 +51,7 @@ def signal_handler(signal, frame):
 def interrupt_callback():
     global interrupted
     return interrupted
+
 
 if len(sys.argv) == 1:
     print "Error: need to specify model name"
@@ -74,13 +67,11 @@ detector = snowboydecoder.HotwordDetector(model, sensitivity=0.5)
 print "Listening... Press Ctrl+C to exit"
 
 # main loop
-detector.start(detected_callback=detectedCallback,
-               audio_recorder_callback=audioRecorderCallback,
-               interrupt_check=interrupt_callback,
-               sleep_time=0.01)
+detector.start(
+    detected_callback=detectedCallback,
+    audio_recorder_callback=audioRecorderCallback,
+    interrupt_check=interrupt_callback,
+    sleep_time=0.01)
 
 detector.terminate()
-
-
-
 
