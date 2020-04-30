@@ -13,11 +13,12 @@ import boto3
 def respond(request):
     # normalize the phrase
     phrase = request.GET.get('phrase').lower()
+    slots = {} # TODO: make sure this works
 
+    # TODO: convert to if else
     try:
         # see if phrase exists in db and get its intent
         intent = Phrase.objects.get(name=phrase).intent
-        slots = {}
     except:
         client = boto3.client('lex-runtime')
 
@@ -36,7 +37,6 @@ def respond(request):
             slots = lex_response['slots']
         except:
             intent = Intent.objects.get(name='intent_not_found')
-            slots = {}
 
     # trigger intent-specific method
     method_response = getattr(IntentMethods, intent.name)(**slots)

@@ -18,6 +18,7 @@ gunicorn = "*"
 django-extensions = "*"
 requests = "*"
 psycopg2-binary = "*"
+snowboy = "*"
 
 [requires]
 python_version = "3.7"
