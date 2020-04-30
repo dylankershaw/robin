@@ -37,7 +37,7 @@ class IntentMethods:
         feels_like = round(r['currently']['apparentTemperature'])
         summary = r['hourly']['summary']
 
-        return f'It is currently {temp} degrees {'and' if temp == feels_like else 'but'} feels like {feels_like}. {summary}'
+        return f'It is currently {temp} degrees {"and" if temp == feels_like else "but"} feels like {feels_like}. {summary}'
 
     def get_train_time(**kwargs):
         time = 'placeholder o clock' # TODO: get this from MTA API
