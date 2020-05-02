@@ -45,5 +45,8 @@ class IntentMethods:
 
         return f"The next {kwargs['direction']} {kwargs['trainLine']} train will depart {station} at {time}."
 
+    def get_joke():
+        return 'I ordered a chicken and an egg from Amazon. I’ll let you know.'
+
     def intent_not_found():
         return 'I don\'t understand, but I\'m learning every day.'
